@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Faces of Death</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <!-- Google Fonts, Bangers for readable spooky UI -->
+    <link href="https://fonts.googleapis.com/css2?family=Creepster&family=Nosifer&family=Bangers&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Main selection/menu screen -->
+    <div id="main-menu" class="screen active">
+        <h1 class="title">FACES OF DEATH</h1>
+        <h2 class="subtitle">Tournament of Terrors</h2>
+        <div class="instructions">
+            <p>Select <b>2-6</b> brawlers to enter the tournament.</p>
+        </div>
+        <!-- Touch/click brawler grid for visual selection -->
+        <div id="brawler-grid"></div>
+        <button id="start-game" class="big-btn" disabled>START THE SLAUGHTER</button>
+    </div>
+    <div id="battle-arena" class="screen">
+        <div class="arena-banner">
+            <span id="score">Top HP: </span>
+            <span id="round">Round: </span>
+        </div>
+        <!-- Canvas-based arena with background and animated fighters -->
+        <div style="display:flex;justify-content:center;">
+            <canvas id="fight-canvas" width="1024" height="700"></canvas>
+            <img id="bg-image" src="images/bg.png" style="display:none;">
+        </div>
+        <div id="battle-log">
+            <h3>Battle Chronicle</h3>
+            <div id="log-entries"></div>
+        </div>
+        <button id="new-game" class="big-btn">New Game</button>
+    </div>
+    <div id="victory" class="screen">
+        <h1 class="title">CHAMPION OF DEATH!</h1>
+        <div id="winner"></div>
+        <button id="restart" class="big-btn">Restart</button>
+    </div>
+    <!-- Sound effects -->
+    <audio id="menu-music" loop><source src="sound/menu.mp3" type="audio/mp3"></audio>
+    <audio id="fight-music" loop><source src="sound/game.mp3" type="audio/mp3"></audio>
+    <audio id="oof-sound"><source src="sound/oof.mp3" type="audio/mp3"></audio>
+    <script src="script.js"></script>
+</body>
+</html>

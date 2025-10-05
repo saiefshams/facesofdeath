@@ -1,0 +1,453 @@
+/* Import horror fonts */
+@import url('https://fonts.googleapis.com/css2?family=Creepster&family=Nosifer&family=Butcherman&display=swap');
+
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Butcherman', cursive;
+    background: linear-gradient(45deg, #0a0000, #1a0000, #2a0000, #0a0000);
+    background-size: 400% 400%;
+    animation: bloodShift 8s ease infinite;
+    color: #ff3333;
+    overflow-x: hidden;
+    min-height: 100vh;
+    user-select: none;
+}
+.brawler-name, .brawler-stats, .fighter-name, .health-text, .log-entry {
+    font-family: 'Bangers', cursive, sans-serif;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    font-size: 1.5rem;
+}
+
+@keyframes bloodShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Screen management */
+.screen {
+    display: none;
+    min-height: 100vh;
+    padding: 20px;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.screen.active {
+    display: flex;
+}
+
+/* Main menu styling */
+#main-menu {
+    text-align: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.title {
+    font-family: 'Nosifer', cursive;
+    font-size: clamp(2.5rem, 8vw, 6rem);
+    color: #ff0000;
+    text-shadow: 4px 4px 0px #000000, 8px 8px 15px #660000;
+    margin-bottom: 10px;
+    animation: titlePulse 3s ease-in-out infinite;
+}
+
+@keyframes titlePulse {
+    0%, 100% { transform: scale(1); text-shadow: 4px 4px 0px #000000, 8px 8px 15px #660000; }
+    50% { transform: scale(1.05); text-shadow: 4px 4px 0px #000000, 8px 8px 25px #ff0000; }
+}
+
+.subtitle {
+    font-family: 'Creepster', cursive;
+    font-size: clamp(1.2rem, 4vw, 2.5rem);
+    color: #cc3333;
+    text-shadow: 2px 2px 5px #000000;
+    margin-bottom: 30px;
+}
+
+.instructions {
+    font-size: clamp(1rem, 3vw, 1.4rem);
+    color: #ffaa33;
+    margin-bottom: 30px;
+    text-shadow: 1px 1px 3px #000000;
+}
+
+/* Brawler selection grid */
+#brawler-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 15px;
+    margin: 30px 0;
+    max-width: 1000px;
+    width: 100%;
+}
+
+.brawler-card {
+    background: rgba(0, 0, 0, 0.7);
+    border: 3px solid #444444;
+    border-radius: 12px;
+    padding: 15px 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.brawler-card:hover {
+    border-color: #ff6666;
+    background: rgba(20, 0, 0, 0.8);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 20px rgba(255, 0, 0, 0.3);
+}
+
+.brawler-card.selected {
+    border-color: #ffff00;
+    background: rgba(50, 50, 0, 0.6);
+    box-shadow: 0 0 25px #ffff00;
+    transform: scale(1.05);
+}
+
+.brawler-avatar {
+    font-size: 3rem;
+    margin-bottom: 8px;
+    display: block;
+}
+
+.brawler-name {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #ffffff;
+    margin-bottom: 5px;
+}
+
+.brawler-stats {
+    font-size: 0.8rem;
+    color: #cccccc;
+    line-height: 1.2;
+}
+
+/* Big action buttons */
+.big-btn {
+    background: linear-gradient(45deg, #660000, #ff0000);
+    color: #ffffff;
+    border: 4px solid #000000;
+    padding: 18px 40px;
+    font-size: clamp(1rem, 3vw, 1.5rem);
+    font-family: 'Creepster', cursive;
+    border-radius: 12px;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: all 0.4s ease;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
+    margin: 20px;
+}
+
+.big-btn:hover:not(:disabled) {
+    background: linear-gradient(45deg, #ff0000, #ff6600);
+    transform: translateY(-4px);
+    box-shadow: 0 10px 30px rgba(255, 0, 0, 0.7);
+}
+
+.big-btn:active:not(:disabled) {
+    transform: translateY(-1px);
+}
+
+.big-btn:disabled {
+    background: #333333;
+    color: #666666;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+/* Battle arena styling */
+#battle-arena {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.arena-banner {
+    display: flex;
+    justify-content: space-between;
+    background: rgba(0, 0, 0, 0.8);
+    border: 3px solid #ff0000;
+    border-radius: 10px;
+    padding: 15px 25px;
+    margin-bottom: 20px;
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+
+#fighters-area {
+    background: rgba(0, 0, 0, 0.6);
+    border: 3px solid #ff0000;
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 20px;
+    min-height: 300px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.fighter {
+    background: rgba(20, 0, 0, 0.8);
+    border: 2px solid #666666;
+    border-radius: 10px;
+    padding: 15px;
+    text-align: center;
+    min-width: 140px;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.fighter.alive {
+    border-color: #00ff00;
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+}
+
+.fighter.dead {
+    border-color: #ff0000;
+    background: rgba(10, 0, 0, 0.5);
+    opacity: 0.5;
+    filter: grayscale(100%);
+}
+
+.fighter.attacking {
+    animation: attackFlash 0.8s ease;
+}
+
+@keyframes attackFlash {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); box-shadow: 0 0 20px #ffff00; }
+}
+
+.fighter-avatar {
+    font-size: 2.5rem;
+    margin-bottom: 8px;
+}
+
+.fighter-name {
+    font-size: 0.9rem;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.health-bar {
+    background: #000000;
+    border: 1px solid #333333;
+    border-radius: 5px;
+    height: 12px;
+    margin: 5px 0;
+    overflow: hidden;
+}
+
+.health-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #ff0000, #ffff00, #00ff00);
+    transition: width 0.5s ease;
+    border-radius: 4px;
+}
+
+.health-text {
+    font-size: 0.7rem;
+    color: #ffffff;
+}
+
+/* Battle log styling */
+#battle-log {
+    background: rgba(0, 0, 0, 0.8);
+    border: 3px solid #ff0000;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+#battle-log h3 {
+    color: #ff6666;
+    margin-bottom: 15px;
+    font-size: 1.4rem;
+    text-align: center;
+}
+
+#log-entries {
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+.log-entry {
+    margin-bottom: 8px;
+    padding: 8px;
+    border-left: 3px solid #ff0000;
+    padding-left: 12px;
+    animation: logAppear 0.5s ease;
+}
+
+@keyframes logAppear {
+    0% { opacity: 0; transform: translateX(-20px); }
+    100% { opacity: 1; transform: translateX(0); }
+}
+
+.log-entry.attack {
+    color: #ff9999;
+    border-left-color: #ff6666;
+}
+
+.log-entry.death {
+    color: #ffff00;
+    border-left-color: #ffff00;
+    font-weight: bold;
+}
+
+.log-entry.round {
+    color: #66ff66;
+    border-left-color: #66ff66;
+    font-weight: bold;
+    text-align: center;
+    border-left: none;
+    background: rgba(0, 50, 0, 0.3);
+    border-radius: 5px;
+}
+
+/* Victory screen */
+#victory {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+#winner {
+    background: rgba(0, 0, 0, 0.8);
+    border: 4px solid #ffff00;
+    border-radius: 20px;
+    padding: 40px;
+    margin: 30px 0;
+    box-shadow: 0 0 40px #ffff00;
+    animation: victoryGlow 2s ease-in-out infinite;
+}
+
+@keyframes victoryGlow {
+    0%, 100% { box-shadow: 0 0 40px #ffff00; }
+    50% { box-shadow: 0 0 60px #ffff00, 0 0 80px rgba(255, 255, 0, 0.5); }
+}
+
+.winner-avatar {
+    font-size: 5rem;
+    margin-bottom: 20px;
+}
+
+.winner-name {
+    font-family: 'Creepster', cursive;
+    font-size: 2.5rem;
+    color: #ffff00;
+    margin-bottom: 15px;
+}
+
+.winner-stats {
+    font-size: 1.2rem;
+    color: #ffffff;
+}
+
+/* Custom scrollbar for battle log */
+#log-entries::-webkit-scrollbar {
+    width: 8px;
+}
+
+#log-entries::-webkit-scrollbar-track {
+    background: #000000;
+    border-radius: 4px;
+}
+
+#log-entries::-webkit-scrollbar-thumb {
+    background: #ff0000;
+    border-radius: 4px;
+}
+
+#log-entries::-webkit-scrollbar-thumb:hover {
+    background: #ff6666;
+}
+
+#fight-canvas {
+  display: block;
+  margin: 0 auto;
+  background: transparent;
+  width: 100vw;
+  max-width: 600px;   /* Soft cap on desktop/tablet for a nice centered look */
+  height: auto;
+  aspect-ratio: 1/1;
+}
+
+#battle-log {
+  max-height: 280px;
+  overflow-y: auto;
+}
+
+@media (max-width: 768px) {
+  #brawler-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+  .brawler-card { padding: 10px 5px; }
+  .brawler-avatar { font-size: 2.5rem; }
+  .brawler-name { font-size: 0.9rem; }
+  .arena-banner {
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+  }
+  #fighters-area { gap: 15px; }
+  .fighter {
+    min-width: 100px;
+  }
+  #battle-log {
+    max-height: 120px;
+    font-size: 0.87rem;
+  }
+}
+
+@media (max-width: 600px) {
+  #fight-canvas {
+    width: 98vw !important;
+    max-width: 98vw !important;
+    height: auto !important;
+    aspect-ratio: 1/1 !important;
+  }
+  #battle-log {
+    max-height: 66px !important;
+    font-size: 0.8rem !important;
+    margin-bottom: 8px !important;
+  }
+  .arena-banner {
+    font-size: 0.98rem !important;
+    padding: 4px 5px !important;
+  }
+  .log-entry {
+    font-size: 0.73rem !important;
+    padding: 2px !important;
+  }
+  .winner-name, .winner-stats, .winner-avatar {
+    font-size: 1rem !important;
+  }
+}
+
+@media (max-width: 480px) {
+  #brawler-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .title { font-size: 2rem; }
+  .subtitle { font-size: 1rem; }
+}
